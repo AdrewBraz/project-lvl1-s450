@@ -4,24 +4,24 @@ const getName = () => readlineSync.question('May I have your name?');
 
 const isEven = num => num % 2 === 0;
 
-const getAnswer = num => readlineSync.question(`Question: ${num}`);
+const getAnswer = value => readlineSync.question(`Question: ${value}`);
 
-const startGame = (name, counter = 0) => {
-  const randomNumber = Math.round(Math.random() * 10);
-  const correctAnswer = isEven(randomNumber) ? 'yes' : 'no';
-  const userAnswer = getAnswer(randomNumber);
+const startGame = (name, counter = 0, limit = 3) => {
+  if (limit === counter) {
+    console.log(`Congratulations, ${name}!`);
+    return;
+  }
+  const question = Math.round(Math.random() * 10);
+  const correctAnswer = isEven(question) ? 'yes' : 'no';
+  const userAnswer = getAnswer(question);
   console.log(`Your answer: ${userAnswer}`);
   if (correctAnswer !== userAnswer) {
-    console.log(`${userAnswer} is the wrong answer ;(. Correct answer was ${correctAnswer}
-    Let's try again, ${name}!`);
+    console.log(`${userAnswer} is the wrong answer ;(. Correct answer was ${correctAnswer}`);
+    console.log(`Let's try again, ${name}!`);
     return;
   }
   console.log('Correct!');
   const count = counter + 1;
-  if (count === 3) {
-    console.log(`Congratulations, ${name}!`);
-    return;
-  }
   startGame(name, count);
 };
 
