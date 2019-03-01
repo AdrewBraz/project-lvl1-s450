@@ -1,12 +1,21 @@
 import readlineSync from 'readline-sync';
 
 const getName = () => readlineSync.question('May I have your name?');
+const getUserAnswer = value => readlineSync.question(`Question: ${value}`);
+const wrognAnswer = (userAnswer, correctAnswer) => {
+  console.log(`${userAnswer} is the wrong answer ;(. Correct answer was ${correctAnswer}`);
+  return false;
+};
+const randomNumber = (range = 10) => Math.floor(Math.random() * range);
 
-
-const startFunc = () => {
+const startGame = (func) => {
   console.log('Welcome to the Brain Games!');
   const userName = getName();
-  console.log(`Hello, ${userName}`);
+  const result = func();
+  return result ? console.log(`Congratulations, ${userName}!`) : console.log(`Let's try again, ${userName}!`);
 };
 
-export default startFunc;
+export {
+  getName, getUserAnswer, wrognAnswer, randomNumber,
+};
+export default startGame;
