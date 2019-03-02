@@ -1,22 +1,16 @@
-import { getUserAnswer, wrognAnswer, randomNumber } from '..';
+import { cons } from 'hexlet-pairs';
+import { randomNumber, gameCore } from '..';
 
 const isEven = num => num % 2 === 0;
 
-const evenGame = (counter = 0) => {
-  const limit = 3;
-  if (limit === counter) {
-    return true;
-  }
-  const question = randomNumber(100)
+const gameRules = 'Answer "yes" if number even otherwise answer "no".';
+
+const evenGame = () => {
+  const question = randomNumber(100);
   const correctAnswer = isEven(question) ? 'yes' : 'no';
-  const userAnswer = getUserAnswer(question);
-  console.log(`Your answer: ${userAnswer}`);
-  if (correctAnswer !== userAnswer) {
-    return wrognAnswer(userAnswer, correctAnswer);
-  }
-  console.log('Correct!');
-  const count = counter + 1;
-  return evenGame(count);
+  return cons(question, correctAnswer);
 };
 
-export default evenGame;
+const brainEven = () => gameCore(evenGame, gameRules)
+
+export default brainEven;
