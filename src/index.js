@@ -4,10 +4,8 @@ import { car, cdr } from 'hexlet-pairs';
 const getName = () => readlineSync.question('May I have your name?');
 const getAnswer = value => readlineSync.question(`Question: ${value}`);
 
-const randomNumber = (range = 10) => Math.floor(Math.random() * range);
-
-const startGame = (func, counter = 0) => {
-  const limit = 3;
+const limit = 3;
+const startGame = (func, counter) => {
   if (counter === limit) {
     return true;
   }
@@ -24,12 +22,13 @@ const startGame = (func, counter = 0) => {
   return false;
 };
 
-const gameCore = (func, gameRules) => {
+const gameCore = (func, gameDescription) => {
   console.log('Welcome to the Brain Games!');
-  console.log(gameRules);
+  console.log(gameDescription);
   const userName = getName();
-  const gameResult = startGame(func);
-  return gameResult ? console.log(`Congratulations, ${userName}!`) : console.log(`Let's try again, ${userName}!`);
+  const gameResult = startGame(func, 0);
+  const finalText = gameResult ? `Congratulations, ${userName}!` : `Let's try again, ${userName}!`;
+  console.log(finalText);
 };
 
-export { randomNumber, gameCore };
+export default gameCore;
