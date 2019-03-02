@@ -8,7 +8,7 @@ const randomOperator = () => {
   return operators[randomItem];
 };
 
-const gameRules = 'What is the result of the expression?';
+const gameDescription = 'What is the result of the expression?';
 
 const getCorrectAnswer = (num1, num2, operator) => {
   switch (operator) {
@@ -29,4 +29,4 @@ const calcGame = () => {
   const correctAnswer = `${getCorrectAnswer(value1, value2, operator)}`;
   return cons(question, correctAnswer);
 };
-export default () => gameCore(calcGame, gameRules);
+export default () => gameCore(calcGame, gameDescription);
