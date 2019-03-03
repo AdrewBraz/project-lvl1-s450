@@ -9,7 +9,7 @@ const progressionLength = 10;
 const progBuilder = (startItem, step, hiddenElementPosition) => {
   let progression = '';
   const hiddenElement = `${startItem + step * hiddenElementPosition}`;
-  for (let i = 0; i < progressionLength; i + 1) {
+  for (let i = 0; i < progressionLength; i++) {
     progression += i === hiddenElementPosition ? '.. ' : `${startItem + i * step} `;
   }
   return cons(progression, hiddenElement);
