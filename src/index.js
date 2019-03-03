@@ -19,6 +19,7 @@ const startGame = (func, counter) => {
     const count = counter + 1;
     return startGame(func, count);
   }
+  console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
   return false;
 };
 

@@ -1,4 +1,4 @@
-import { cons, car, cdr } from 'hexlet-pairs';
+import { cons } from 'hexlet-pairs';
 import randomNumber from '../utils';
 import gameCore from '..';
 
@@ -8,11 +8,10 @@ const progressionLength = 10;
 
 const progBuilder = (startItem, step, hiddenElementPosition) => {
   let progression = '';
-  const hiddenElement = `${startItem + step * hiddenElementPosition}`;
-  for (let i = 0; i < progressionLength; i++) {
+  for (let i = 0; i < progressionLength; i += 1) {
     progression += i === hiddenElementPosition ? '.. ' : `${startItem + i * step} `;
   }
-  return cons(progression, hiddenElement);
+  return progression;
 };
 
 const progGame = () => {
@@ -20,8 +19,8 @@ const progGame = () => {
   const hiddenElementPosition = randomNumber(0, progressionLength);
   const firstItem = randomNumber(0, 20);
   const result = progBuilder(firstItem, step, hiddenElementPosition);
-  const question = car(result);
-  const correctAnswer = cdr(result);
+  const question = result;
+  const correctAnswer = `${firstItem + step * hiddenElementPosition}`;
   return cons(question, correctAnswer);
 };
 
