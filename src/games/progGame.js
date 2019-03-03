@@ -1,29 +1,28 @@
-import { cons } from 'hexlet-pairs';
+import { cons, car, cdr } from 'hexlet-pairs';
 import randomNumber from '../utils';
 import gameCore from '..';
 
-
 const gameDescription = 'What number is missing in this progression?';
+
+const progressionLength = 10;
+
+const progBuilder = (startItem, step, hiddenElementPosition) => {
+  let progression = '';
+  const hiddenElement = `${startItem + step * hiddenElementPosition}`;
+  for (let i = 0; i < progressionLength; i + 1) {
+    progression += i === hiddenElementPosition ? '.. ' : `${startItem + i * step} `;
+  }
+  return cons(progression, hiddenElement);
+};
 
 const progGame = () => {
   const step = randomNumber(1, 5);
-  const length = 10;
-  const missedItem = length - randomNumber(0, 10);
+  const hiddenElementPosition = randomNumber(0, progressionLength);
   const firstItem = randomNumber(0, 20);
-  const progBuilder = (currentItem, itemPosition, currentProgression, correctAnswer) => {
-    if (itemPosition === length) {
-      return cons(currentProgression, correctAnswer);
-    }
-    const item = currentItem + step;
-    const position = itemPosition + 1;
-    if (position === missedItem) {
-      const progression = `${currentProgression} ..`;
-      return progBuilder(item, position, progression, `${item}`);
-    }
-    const progression = `${currentProgression} ${item}`;
-    return progBuilder(item, position, progression, correctAnswer);
-  };
-  return progBuilder(firstItem, 0, '', '');
+  const result = progBuilder(firstItem, step, hiddenElementPosition);
+  const question = car(result);
+  const correctAnswer = cdr(result);
+  return cons(question, correctAnswer);
 };
 
 export default () => gameCore(progGame, gameDescription);
